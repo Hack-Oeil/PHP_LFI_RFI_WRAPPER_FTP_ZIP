@@ -1,0 +1,22 @@
+version: '3.3'
+services:
+  webserver:
+    build: server_1/
+    labels:
+      ho.ctf.cyrhades: webserver
+    ports:
+      - "80:80"
+    container_name: ho-webserver
+  cloud:
+    labels:
+      ho.ctf.cyrhades: cloud
+    image: stilliard/pure-ftpd
+    container_name: ho-cloud
+    ports:
+      - "21:21"
+      - "30000-30009:30000-30009"
+    environment:
+      FTP_USER_NAME: "baddevbutbetter"
+      FTP_USER_PASS: "8shm2gFXvL22UmKln"
+      FTP_USER_HOME: "/home/documents"
+    restart: on-failure
